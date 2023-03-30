@@ -72,7 +72,7 @@ def Genetic_Algorithms():
         return [generate_random(length) for _ in range(population_size)]
 
 # Define genetic algorithm function
-    def genetic_algorithm(W, m, w, v, c, num_generations, population_size, num_parents, num_offsprings, mutation_rate):
+    def genetic(W, m, w, v, c, num_generations, population_size, num_parents, num_offsprings, mutation_rate):
         length = len(w)
         population = generate_population(population_size, length)
         best_max_value = -1
@@ -102,7 +102,7 @@ def Genetic_Algorithms():
      # Read input file
     input_file = "INPUT.txt"
     W, m, w, v, c = read_input_file(input_file)
-    max_value, knapsack = genetic_algorithm(W, m, w, v, c, num_generations, population_size, num_parents, num_offsprings, mutation_rate)
+    max_value, knapsack = genetic(W, m, w, v, c, num_generations, population_size, num_parents, num_offsprings, mutation_rate)
     # Write output file
     output_file = "OUTPUT.txt"
     write_output_file(output_file, max_value, knapsack)
