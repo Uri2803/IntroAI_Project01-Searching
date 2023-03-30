@@ -20,7 +20,7 @@ def read_input_file(filename):
 def write_output_file(file_name, max_value, knapsack):
     with open(file_name, 'w') as f:
         f.write(str(max_value) + '\n')
-        f.write(' '.join(str(x) for x in knapsack))
+        f.write(' ,'.join(str(x) for x in knapsack))
 
 # Define fitness function
 
