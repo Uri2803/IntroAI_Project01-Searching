@@ -311,25 +311,25 @@ if __name__ == '__main__':
     if select==1: 
        for i in range(1, 11):
         input_file_name='INPUT_{}.txt'.format(i)
-        output_file_name='OUTPUT_{},txt'.format(i)
+        output_file_name='OUTPUT_{}.txt'.format(i)
         Brute_Force_Searching_Algorithms(input_file_name, output_file_name)
 
     if select==2:
         for i in range(1, 11):
             input_file_name='INPUT_{}.txt'.format(i)
-            output_file_name='OUTPUT_{},txt'.format(i)
+            output_file_name='OUTPUT_{}.txt'.format(i)
             Branch_and_Bound_Algorithm(input_file_name, output_file_name)
         
     if select==3:
        for i in range(1, 11):
             input_file_name='INPUT_{}.txt'.format(i)
-            output_file_name='OUTPUT_{},txt'.format(i)
+            output_file_name='OUTPUT_{}.txt'.format(i)
             Local_Beam_Search_Algorithms(input_file_name, output_file_name)
          
     if select==4:
        for i in range(1, 11):
             input_file_name='INPUT_{}.txt'.format(i)
-            output_file_name='OUTPUT_{},txt'.format(i)
+            output_file_name='OUTPUT_{}.txt'.format(i)
             Genetic_Algorithms(input_file_name, output_file_name)
         
     if select > 4 and select == 0:
