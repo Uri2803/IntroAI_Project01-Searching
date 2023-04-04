@@ -5,7 +5,7 @@ import heapq
 import sys
 from queue import PriorityQueue
 def menu():
-    print("# 1: ")
+    print("# 1:  Brute Force Searching Algorithms")
     print("# 2: Branch và Bound Algorithms")
     print("# 3: Local Beam Search Algorithms")
     print("# 4: Genetic Algorithms")
@@ -26,7 +26,74 @@ def write_output_file(file_name, max_value, knapsack):
         f.write(str(max_value) + '\n')
         f.write(' '.join(str(x) for x in knapsack))
 #---------------------------------
+def  Brute_Force_Searching_Algorithms():
+    def checkClass(choice,label,numOfClass):
+        # kiểm tra một đã sử dụng items trong tất cả class chưa
+        temp=[]
+        for i in range(1,numOfClass+2):
+            temp.append(0)
+        for i in range(len(choice)):
+            if choice[i]=='1':
+                temp[label[i]]=1
+        for i in range(1,numOfClass):
+            if temp[i]!=1:
+                return False 
+        return True
 
+
+    def generate_binary_strings(n):
+    #sinh chuỗi nhị phân để đưa ra lựa chọn(1 la` chon)
+        binary_strings = []
+        for i in range(2**n):
+            binary_strings.append(bin(i)[2:].zfill(n))
+        return binary_strings
+
+
+    def sumofValue(values,choice):
+    #tinh gia tri nhung vat duoc chon
+        cost=0
+        for i in range(len(choice)):
+            if choice[i]=='1':
+                cost+=values[i]
+        return cost
+
+    def sumofWeight(weight,choice):
+        #tinh can nang nhung vat duoc chon
+        Weith_limit=0
+        for i in range(len(choice)):
+            if choice[i]=='1':
+                Weith_limit+=weight[i]
+        return Weith_limit
+
+
+    def bruteForceSearch(w,numOfClass,weight,values,label):
+        max_value=0 #luu mot bien de tinh toan gia tri lon nhat tim dc
+        binary_choice=generate_binary_strings(len(label)) #sinh cac lua chon
+        optimize_choice=binary_choice[0] #tao mot mang de luu ket qua chon
+        for i in range(len(binary_choice)):
+            weight_sum=sumofWeight(weight,binary_choice[i])
+            value_sum=sumofValue(values,binary_choice[i])
+
+            if checkClass(binary_choice[i],label,m)==False :continue
+
+            if weight_sum>w :continue
+
+            if value_sum>max_value:
+                max_value=value_sum
+                optimize_choice=binary_choice[i]
+        return max_value,optimize_choice
+
+    input_file = "INPUT.txt" 
+    W, m, w, v, c = read_input_file(input_file)
+    max_value, knapsack = bruteForceSearch(W,m,w,v,c)
+#    Write output file
+    output_file = "OUTPUT.txt"
+    write_output_file(output_file, max_value, knapsack)
+
+
+
+
+#----------------------------
 def Branch_and_Bound_Algorithm():
     # class Item:
     #     def __init__(self, weight: float, value: int, class_label: int):
@@ -247,8 +314,8 @@ def Genetic_Algorithms():
 if __name__ == '__main__':
     menu()
     select =int (input("Enter selection algorithm: "))
-    # if select==1: 
-    #    #call function
+    if select==1: 
+       Brute_Force_Searching_Algorithms()
     if select==2:
         Branch_and_Bound_Algorithm()
     if select==3:
