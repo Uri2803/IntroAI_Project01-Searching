@@ -26,7 +26,7 @@ def write_output_file(file_name, max_value, knapsack):
         f.write(str(max_value) + '\n')
         f.write(' '.join(str(x) for x in knapsack))
 #---------------------------------
-def  Brute_Force_Searching_Algorithms():
+def  Brute_Force_Searching_Algorithms(input_file_name, output_file_name):
     def checkClass(choice,label,numOfClass):
         # kiểm tra một đã sử dụng items trong tất cả class chưa
         temp=[]
@@ -83,18 +83,16 @@ def  Brute_Force_Searching_Algorithms():
                 optimize_choice=binary_choice[i]
         return max_value,optimize_choice
 
-    input_file = "INPUT.txt" 
-    W, m, w, v, c = read_input_file(input_file)
+    W, m, w, v, c = read_input_file(input_file_name)
     max_value, knapsack = bruteForceSearch(W,m,w,v,c)
 #    Write output file
-    output_file = "OUTPUT.txt"
-    write_output_file(output_file, max_value, knapsack)
+    write_output_file(output_file_name, max_value, knapsack)
 
 
 
 
 #----------------------------
-def Branch_and_Bound_Algorithm():
+def Branch_and_Bound_Algorithm(input_file_name, output_file_name):
     # class Item:
     #     def __init__(self, weight: float, value: int, class_label: int):
     #         self.weight = weight
@@ -155,15 +153,14 @@ def Branch_and_Bound_Algorithm():
                 return str(self.best_value), ''.join([str(int(i)) for i in self.best_items])
 
 
-    input_file = "INPUT.txt"
-    W, m, w, v, c = read_input_file(input_file)
+    W, m, w, v, c = read_input_file(input_file_name)
     bb=knapsack_bnb(W, m, w, v, c)
     max_value, knapsack =  bb.solve()
     output_file = "OUTPUT.txt"
-    write_output_file(output_file, max_value, knapsack)
+    write_output_file(output_file_name, max_value, knapsack)
 
 #-----------------------------
-def  Local_Beam_Search_Algorithms():
+def  Local_Beam_Search_Algorithms(input_file_name, output_file_name):
     def local_beam_search(W, m, w, v, c, k=15):
         # Get the number of items
         n = len(w)
@@ -222,15 +219,14 @@ def  Local_Beam_Search_Algorithms():
         best_fitness = fitnesses[best_index]
         # Return the best solution found
         return best_fitness, best_solution
-    input_file = "INPUT.txt"
-    W, m, w, v, c = read_input_file(input_file)
+    W, m, w, v, c = read_input_file(input_file_name)
     max_value, knapsack = local_beam_search(W, m, w, v, c, k=35)
     # Write output file
     output_file = "OUTPUT.txt"
-    write_output_file(output_file, max_value, knapsack)
+    write_output_file(output_file_name, max_value, knapsack)
     
 #---------------------------------
-def Genetic_Algorithms():
+def Genetic_Algorithms(input_file_name, output_file_name):
 
     def fitness_function(chromosome, W, w, v):
         weight = np.sum(chromosome * w)
@@ -304,23 +300,40 @@ def Genetic_Algorithms():
     num_offsprings = population_size - num_parents
     mutation_rate = 0.1
      # Read input file
-    input_file = "INPUT.txt"
-    W, m, w, v, c = read_input_file(input_file)
+    W, m, w, v, c = read_input_file(input_file_name)
     max_value, knapsack = genetic_algorithm(W, m, w, v, c, num_generations, population_size, num_parents, num_offsprings, mutation_rate)
     # Write output file
-    output_file = "OUTPUT.txt"
-    write_output_file(output_file, max_value, knapsack)
+    write_output_file(output_file_name, max_value, knapsack)
 
 if __name__ == '__main__':
     menu()
     select =int (input("Enter selection algorithm: "))
     if select==1: 
-       Brute_Force_Searching_Algorithms()
+       for i in range(1, 11):
+        input_file_name='INPUT_{}.txt'.format(i)
+        output_file_name='OUTPUT_{},txt'.format(i)
+        Brute_Force_Searching_Algorithms(input_file_name, output_file_name)
+        print(input_file_name)
     if select==2:
-        Branch_and_Bound_Algorithm()
+        for i in range(1, 11):
+            input_file_name='INPUT_{}.txt'.format(i)
+            output_file_name='OUTPUT_{},txt'.format(i)
+            Branch_and_Bound_Algorithm(input_file_name, output_file_name)
+            print(input_file_name)
+        
     if select==3:
-         Local_Beam_Search_Algorithms()
+       for i in range(1, 11):
+            input_file_name='INPUT_{}.txt'.format(i)
+            output_file_name='OUTPUT_{},txt'.format(i)
+            Local_Beam_Search_Algorithms(input_file_name, output_file_name)
+            print(input_file_name)
+         
     if select==4:
-        Genetic_Algorithms()
+       for i in range(1, 11):
+            input_file_name='INPUT_{}.txt'.format(i)
+            output_file_name='OUTPUT_{},txt'.format(i)
+            Genetic_Algorithms(input_file_name, output_file_name)
+            print(input_file_name)
+        
     if select > 4 and select == 0:
         print(" No select - end! ")
