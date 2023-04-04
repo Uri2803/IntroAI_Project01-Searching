@@ -331,7 +331,6 @@ if __name__ == '__main__':
             input_file_name='INPUT_{}.txt'.format(i)
             output_file_name='OUTPUT_{},txt'.format(i)
             Genetic_Algorithms(input_file_name, output_file_name)
-            print(input_file_name)
         
     if select > 4 and select == 0:
         print(" No select - end! ")
